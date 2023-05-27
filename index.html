@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="script.js"></script>
+    <title>Luni's Biodata</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="navbar">
+                <ul class="menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#aboutme">About Me</a></li>
+                    <li><a href="#biodata">Biodata</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="home">
+            <h2>Hello! This Is Luni ^__^</h2>
+            <div class="owl-carousel">
+                <div class="carousel-item">
+                    <img src="images/IMG_0951.jpg" alt="Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="images/IMG_2152.jpg" alt="Image 2">
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="aboutme" class="aboutme">
+                <h2>About Me</h2>
+                <p>Hey there! I'm a passionate IT student with a strong interest in web development, programming, and
+                    database management. The world of websites and web applications fascinates me because it's where
+                    creativity meets functionality. I enjoy designing and building user-friendly interfaces that make
+                    people's lives easier and more enjoyable. When it comes to programming, I love the thrill of writing
+                    code and bringing ideas to life. It's creating dynamic websites with HTML, CSS, and JavaScript. With
+                    every project, I'm constantly learning and growing, exploring new frameworks and technologies to
+                    stay ahead in this ever-evolving field. Let's build something amazing together!</p>
+                <div class="logo-container">
+                    <a href="https://www.linkedin.com/in/chlunidia/">
+                        <img src="images/logo_linkedin.png" alt="Logo LinkedIn" class="logo">
+                    </a>
+                    <a href="https://github.com/Chlunidia">
+                        <img src="images/logo_github.png" alt="Logo GitHub" class="logo">
+                    </a>
+                    <a href="https://www.instagram.com/chlunidia/">
+                        <img src="images/logo_ig.png" alt="Logo IG" class="logo">
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <section id="biodata" class="biodata">
+            <form id="myForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="education">Education:</label>
+                <input type="text" id="education" name="education" required>
+
+                <label for="hobbies">Hobbies:</label>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="reading" name="hobbies" value="Reading">
+                    <label for="reading">Reading</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="writing" name="hobbies" value="Writing">
+                    <label for="writing">Writing</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="music" name="hobbies" value="Playing Music">
+                    <label for="music">Playing Music</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="gardening" name="hobbies" value="Gardening">
+                    <label for="gardening">Gardening</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="sports" name="hobbies" value="Sports">
+                    <label for="sports">Sports</label>
+                </div>
+
+                <label for="gender">Gender:</label>
+                <div class="radio-container">
+                    <input type="radio" id="male" name="gender" value="Male">
+                    <label for="male">Male</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="female" name="gender" value="Female">
+                    <label for="female">Female</label>
+                </div>
+
+                <input type="submit" value="Submit">
+            </form>
+
+            <div class="custom-alert-overlay" id="customAlertOverlay" style="display: none;">
+                <div class="custom-alert">
+                    <h3>Submitted Data</h3>
+                    <p id="submittedName"></p>
+                    <p id="submittedEducation"></p>
+                    <p id="submittedHobbies"></p>
+                    <p id="submittedGender"></p>
+                    <button id="closeAlert">Close</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 1500,
+                autoplayHoverPause: true
+            });
+        });
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form data
+            var name = document.getElementById("name").value;
+            var education = document.getElementById("education").value;
+            var hobbies = [];
+            var checkboxes = document.getElementsByName("hobbies");
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    hobbies.push(checkbox.value);
+                }
+            });
+            var gender = document.querySelector('input[name="gender"]:checked');
+
+            // Display the custom alert
+            document.getElementById("submittedName").innerHTML = "Name: " + name;
+            document.getElementById("submittedEducation").innerHTML = "Education: " + education;
+            document.getElementById("submittedHobbies").innerHTML = "Hobbies: " + hobbies.join(", ");
+            document.getElementById("submittedGender").innerHTML = "Gender: " + (gender ? gender.value : "");
+            document.getElementById("customAlertOverlay").style.display = "flex";
+
+            // Close the custom alert when "Close" button is clicked
+            document.getElementById("closeAlert").addEventListener("click", function () {
+                document.getElementById("customAlertOverlay").style.display = "none";
+            });
+
+            // Reset the form
+            document.getElementById("myForm").reset();
+        });
+    </script>
+</body>
+
+</html>
